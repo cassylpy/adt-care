@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>荷爾蒙治療期間 居家自我檢視｜基隆長庚醫院</title>
+<meta name="description" content="攝護腺癌荷爾蒙治療期間的居家自我檢視工具。回答問題後產生圖片，可存到手機提供醫療人員參考。基隆長庚醫院腫瘤個案管理提供。">
+<meta name="theme-color" content="#14625A">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:site_name" content="基隆長庚醫院 腫瘤個案管理">
+<meta property="og:title" content="荷爾蒙治療期間 居家自我檢視">
+<meta property="og:description" content="攝護腺癌荷爾蒙治療期間的居家自我檢視工具，做完會產生一張圖片，方便自行記錄與提供醫療人員參考。">
+<meta name="format-detection" content="telephone=yes">
+<style>
+:root{
+  --ink:#1C2B2E;
+  --ink-soft:#4A5D60;
+  --paper:#FCFBF7;
+  --panel:#EDF1EC;
+  --teal:#14625A;
+  --teal-deep:#0D3F3A;
+  --teal-pale:#DCEAE6;
+  --amber:#9C5F14;
+  --amber-pale:#F7ECD9;
+  --alert:#8E3325;
+  --alert-pale:#F8E4E0;
+  --rule:#D3D8D1;
+}
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:"Noto Sans TC","PingFang TC","Heiti TC","Microsoft JhengHei",sans-serif;
+  font-size:19px;
+  line-height:1.75;
+  overflow-wrap:break-word;
+  word-break:break-word;
+}
+.wrap{max-width:660px;margin:0 auto;padding:0 20px 160px;}
+
+h1,h2,h3{
+  font-family:"Noto Serif TC","Songti TC","PMingLiU",serif;
+  font-weight:700;
+  line-height:1.35;
+  margin:0;
+}
+h1{font-size:34px;letter-spacing:.01em;}
+h2{font-size:26px;}
+h3{font-size:21px;}
+
+header{padding:44px 0 28px;}
+header .lede{font-size:19px;color:var(--ink-soft);margin:16px 0 0;}
+header .meta{
+  margin-top:22px;padding-top:14px;border-top:2px solid var(--rule);
+  font-size:16px;color:var(--ink-soft);
+}
+
+/* 緊急面板 —— 全頁最重要的一塊 */
+.urgent{
+  background:var(--alert-pale);
+  border:3px solid var(--alert);
+  border-radius:4px;
+  padding:24px 22px;
+  margin:8px 0 40px;
+}
+.urgent h2{color:var(--alert);font-size:23px;}
+.urgent p{margin:12px 0 0;font-size:18px;}
+.urgent ul{margin:14px 0 0;padding-left:22px;}
+.urgent li{margin:8px 0;font-size:18px;}
+.urgent .tel{
+  margin-top:18px;padding:12px 14px;background:#fff;
+  border:2px solid var(--alert);border-radius:3px;font-size:18px;
+}
+.urgent .tel a{color:var(--alert);font-weight:700;}
+.callcm .tel a{color:var(--teal-deep);font-weight:700;}
+header .meta a{color:var(--teal-deep);font-weight:500;}
+.urgent .tel strong{display:block;font-size:16px;color:var(--alert);margin-bottom:4px;}
+.blank{display:inline-block;min-width:9em;border-bottom:2px solid var(--ink);}
+
+section.q-group{margin:0 0 40px;}
+section.q-group > h2{
+  padding-bottom:10px;border-bottom:3px solid var(--teal);color:var(--teal-deep);
+}
+section.q-group > .why{
+  margin:14px 0 24px;font-size:17px;color:var(--ink-soft);
+}
+
+.q{margin:0 0 28px;}
+.q .prompt{font-size:20px;font-weight:500;margin:0 0 12px;}
+.opts{display:flex;flex-wrap:wrap;gap:10px;}
+.opts button{
+  flex:1 1 auto;min-width:104px;min-height:56px;
+  display:flex;align-items:center;justify-content:center;
+  line-height:1.35;text-align:center;
+  font:inherit;font-size:18px;
+  background:#fff;color:var(--ink);
+  border:2px solid var(--rule);border-radius:3px;
+  cursor:pointer;padding:8px 14px;
+  transition:background .12s ease,border-color .12s ease;
+}
+.opts button:hover{border-color:var(--teal);}
+.opts button:focus-visible{outline:3px solid var(--teal);outline-offset:2px;}
+.opts button[aria-pressed="true"]{
+  background:var(--teal);border-color:var(--teal-deep);color:#fff;font-weight:500;
+}
+
+/* 底部進度列 */
+.bar{
+  position:fixed;left:0;right:0;bottom:0;
+  background:#fff;border-top:3px solid var(--teal-deep);
+  padding:14px 20px calc(14px + env(safe-area-inset-bottom));z-index:20;
+}
+.bar-in{
+  max-width:660px;margin:0 auto;
+  display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+}
+.bar .count{font-size:17px;color:var(--ink-soft);flex:1 1 140px;}
+.bar button{
+  font:inherit;font-size:19px;font-weight:500;
+  min-height:56px;padding:10px 26px;
+  background:var(--teal);color:#fff;
+  border:none;border-radius:3px;cursor:pointer;
+}
+.bar button:disabled{background:#B4BDB6;cursor:not-allowed;}
+.bar button:focus-visible{outline:3px solid var(--ink);outline-offset:2px;}
+.bar .ghost{background:#fff;color:var(--teal-deep);border:2px solid var(--teal);padding:8px 18px;min-height:52px;font-size:17px;}
+
+/* 結果 */
+#result{margin-top:8px;}
+.res-head{
+  background:var(--panel);border-left:8px solid var(--teal);
+  padding:22px;margin-bottom:30px;
+}
+.res-head h2{color:var(--teal-deep);}
+.res-head p{margin:10px 0 0;font-size:18px;}
+
+.card{border:2px solid var(--rule);border-radius:4px;padding:20px 22px;margin:0 0 20px;background:#fff;}
+.card.lv-urgent{border-color:var(--alert);background:var(--alert-pale);}
+.card.lv-watch{border-color:var(--amber);background:var(--amber-pale);}
+.card.lv-ok{border-color:var(--teal);background:var(--teal-pale);}
+.card .tag{
+  display:inline-block;font-size:15px;font-weight:700;
+  padding:3px 10px;border-radius:3px;margin-bottom:10px;color:#fff;
+}
+.lv-urgent .tag{background:var(--alert);}
+.lv-watch .tag{background:var(--amber);}
+.lv-ok .tag{background:var(--teal);}
+.card h3{margin-bottom:8px;}
+.card ul{margin:10px 0 0;padding-left:22px;}
+.card li{margin:7px 0;font-size:18px;}
+.card p{margin:8px 0 0;font-size:18px;}
+.card a{color:var(--teal-deep);font-weight:500;word-break:break-all;}
+.card a:focus-visible{outline:3px solid var(--teal);outline-offset:2px;}
+
+.always{margin-top:36px;}
+.always > h2{padding-bottom:10px;border-bottom:3px solid var(--teal);color:var(--teal-deep);margin-bottom:22px;}
+
+details.ref{margin-top:40px;border-top:2px solid var(--rule);padding-top:20px;}
+details.ref summary{font-size:16px;cursor:pointer;color:var(--ink-soft);font-weight:400;padding:8px 0;}
+details.ref summary:focus-visible{outline:3px solid var(--teal);outline-offset:2px;}
+details.ref ol{padding-left:22px;font-size:14px;color:var(--ink-soft);line-height:1.65;}
+details.ref li{margin:8px 0;}
+
+.disclaimer{
+  margin-top:36px;padding:20px;background:var(--panel);
+  font-size:16px;color:var(--ink-soft);line-height:1.7;border-radius:4px;
+}
+.callcm{
+  background:var(--teal-pale);
+  border:3px solid var(--teal);
+  border-radius:4px;
+  padding:24px 22px;
+  margin:0 0 40px;
+}
+.callcm h2{color:var(--teal-deep);font-size:23px;}
+.callcm p{margin:12px 0 0;font-size:18px;}
+.callcm ul{margin:14px 0 0;padding-left:22px;}
+.callcm li{margin:8px 0;font-size:18px;}
+.callcm .tel{
+  margin-top:18px;padding:12px 14px;background:#fff;
+  border:2px solid var(--teal);border-radius:3px;font-size:19px;font-weight:500;
+}
+.callcm .tel strong{display:block;font-size:16px;font-weight:700;color:var(--teal-deep);margin-bottom:4px;}
+
+#shotCheck{margin:28px 0 0;}
+#shotCheck p{font-size:17px;color:var(--ink-soft);margin:0 0 12px;}
+#shotCheck img{
+  display:block;width:100%;max-width:100%;height:auto;
+  border:2px solid var(--rule);border-radius:4px;
+}
+
+.who{
+  background:var(--panel);border-radius:4px;padding:18px 20px;margin:0 0 28px;
+}
+.who label{display:block;font-size:17px;color:var(--ink-soft);margin:0 0 6px;}
+.who label + input{margin-bottom:16px;}
+.who input{
+  width:100%;font:inherit;font-size:19px;padding:12px 14px;min-height:52px;
+  border:2px solid var(--rule);border-radius:3px;background:#fff;color:var(--ink);
+}
+.who input:last-child{margin-bottom:0;}
+.who input:focus-visible{outline:3px solid var(--teal);outline-offset:2px;}
+.who input::placeholder{color:#96A19A;}
+
+.hidden{display:none;}
+
+
+
+.note-doc{
+  margin-top:30px;padding:20px;border:2px dashed var(--teal);border-radius:4px;
+  font-size:17px;
+}
+.note-doc h3{color:var(--teal-deep);margin-bottom:8px;}
+
+@media (max-width:520px){
+  .who input{font-size:18px;}
+  .card a{word-break:break-word;}
+  body{font-size:18px;-webkit-tap-highlight-color:rgba(20,98,90,.15);}
+  h1{font-size:27px;}
+  h2{font-size:22px;}
+  h3{font-size:20px;}
+  .wrap{padding:0 15px 180px;}
+  header{padding:28px 0 20px;}
+  .urgent,.callcm{padding:20px 16px;}
+  .card{padding:17px 16px;}
+  .opts{gap:8px;}
+  .opts button{flex:1 1 calc(50% - 4px);min-width:0;font-size:17px;padding:8px 6px;}
+  .bar-in{gap:10px;}
+  .bar .count{flex:1 1 100%;font-size:16px;}
+  .bar button{flex:1 1 auto;}
+}
+@media (max-width:380px){
+  body{font-size:17px;}
+  h1{font-size:25px;}
+  h2{font-size:21px;}
+  h3{font-size:19px;}
+  .wrap{padding:0 12px 175px;}
+  .urgent,.callcm{padding:18px 14px;}
+  .card{padding:15px 14px;}
+  .urgent li,.callcm li,.card li,.card p{font-size:17px;}
+  .opts button{font-size:16px;padding:8px 4px;min-height:54px;}
+  .q .prompt{font-size:18px;}
+  section.q-group > .why{font-size:16px;}
+  .bar{padding:12px 14px calc(12px + env(safe-area-inset-bottom));}
+  .bar button{font-size:18px;padding:10px 18px;min-height:54px;width:100%;}
+  .who input{min-height:50px;}
+}
+
+@media (prefers-reduced-motion:reduce){*{transition:none !important;}}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>荷爾蒙治療期間<br>居家自我檢視</h1>
+  <p class="lede">攝護腺癌荷爾蒙治療（男性荷爾蒙阻斷治療）會慢慢改變身體的一些狀況。這份檢視幫您整理最近的身體變化，做完會產生一張圖片，存到手機，方便您自行記錄以及提供醫療人員參考。</p>
+  <p class="meta">
+    基隆長庚醫院　腫瘤個案管理<br>
+    個案管理師　林佩諭　<a href="tel:0975361081">0975-361-081</a>
+  </p>
+</header>
+
+<div class="urgent">
+  <h2>這些情況，立刻就醫</h2>
+  <p>不要等下次回診，也不用先做完這份檢視。</p>
+  <ul>
+    <li>胸口悶痛、冒冷汗，或休息時仍然喘不過氣</li>
+    <li>腿突然無力、發麻，或大小便失去控制</li>
+    <li>跌倒之後痛到沒辦法站、沒辦法走</li>
+    <li>單側小腿腫脹疼痛</li>
+    <li>發燒合併發冷發抖</li>
+  </ul>
+  <div class="tel">
+    <strong>基隆長庚醫院 急診部</strong>
+    基隆市安樂區麥金路222號<br>
+    <a href="tel:0224313131">(02)2431-3131</a>　　救護車 <a href="tel:119">119</a>
+  </div>
+</div>
+
+<div class="callcm">
+  <h2>這些情況，先打電話給個管師</h2>
+  <p>不確定要不要回診、或不知道該掛哪一科，也可以先問。</p>
+  <ul>
+    <li>突然而且劇烈的骨頭痛、背痛</li>
+    <li>打針的地方紅腫、發熱、疼痛或化膿</li>
+    <li>熱潮紅、疲倦或心情低落，已經影響到日常生活</li>
+    <li>對用藥或回診安排有疑問</li>
+  </ul>
+  <div class="tel">
+    <strong>個案管理師</strong>
+    林佩諭　<a href="tel:0975361081">0975-361-081</a>
+  </div>
+</div>
+
+<div class="who">
+  <label for="pName">您的姓名</label>
+  <input id="pName" type="text" inputmode="text" autocomplete="name" placeholder="選填，會印在圖片上">
+  <label for="pNo">病歷號</label>
+  <input id="pNo" type="text" inputmode="numeric" placeholder="選填">
+</div>
+
+<div id="quiz"></div>
+<div id="result" class="hidden" aria-live="polite"></div>
+<div id="shotCheck"></div>
+
+<details class="ref">
+  <summary>資料來源</summary>
+  <ol>
+    <li>Canadian Urological Association guideline on androgen deprivation therapy: Adverse events and management strategies.</li>
+    <li>Prostate Cancer 360 Working Group. A Proposal for the Comprehensive Care of Men on Androgen Deprivation Therapy. <em>Urology Practice.</em></li>
+    <li>EAU-EANM-ESTRO-ESUR-ISUP-SIOG Guidelines on Prostate Cancer.</li>
+    <li>Nguyen PL, et al. Adverse effects of androgen deprivation therapy and strategies to mitigate them. <em>Eur Urol.</em> 2015;67(5):825-836.</li>
+    <li>Mousa M, et al. Metabolic, cardiac, and bone health testing in patients with prostate cancer on androgen-deprivation therapy. <em>Cancer.</em> 2025.</li>
+    <li>Alberta Health Services. Bone Health in Patients with Prostate Cancer.（鈣與維生素D劑量）</li>
+    <li>中華民國骨質疏鬆症學會．骨質疏鬆症治療指引（引用 NOF／IOF 鈣與維生素D建議）。</li>
+    <li>Physical exercise for bone health in men with prostate cancer receiving androgen deprivation therapy: a systematic review.</li>
+    <li>Irani J, et al. Efficacy of venlafaxine, medroxyprogesterone acetate, and cyproterone acetate for vasomotor hot flushes in men taking GnRH analogues for prostate cancer. <em>Lancet Oncol.</em> 2010;11(2):147-154.</li>
+    <li>Management of Androgen Deprivation Therapy-Associated Hot Flashes in Men With Prostate Cancer. <em>Oncol Nurs Forum.</em> 2019;46(4).</li>
+    <li>Crabb S, et al. MANCAN2: guided self-help cognitive behavioural therapy for hot flushes and night sweats during androgen deprivation therapy. <em>Trials.</em> 2023;24(1):450.</li>
+    <li>Memorial Sloan Kettering Cancer Center. How To Care For Your Injection Site After a Degarelix Injection.（注射部位照護）</li>
+    <li>Barnes KA, et al. Nutrition care guidelines for men with prostate cancer undergoing androgen deprivation therapy: do we have enough evidence? <em>Prostate Cancer Prostatic Dis.</em> 2019;22(2):221-234.</li>
+    <li>Kenfield SA, et al. Nutrition Guidance for Patients on Androgen Deprivation Therapy. <em>Eur Urol Focus.</em> 2023;9(3):427-430.</li>
+    <li>Wright HH, et al. The effect of dietary interventions or patterns on the cardiometabolic health of individuals treated with androgen deprivation therapy for prostate cancer: a systematic review. <em>Maturitas.</em> 2024;184:107940.</li>
+  </ol>
+</details>
+
+<div class="disclaimer">
+  這份檢視不能取代醫師的診斷。它整理的是荷爾蒙治療期間常見的身體變化，結果只是幫助您跟醫療團隊溝通的參考。<br><br>
+  您填的內容只暫時留在這支手機的瀏覽器裡，關掉分頁就消失，不會傳送到任何地方。若要保留，請按「存成圖片」存到手機。<br><br>
+  基隆長庚醫院　腫瘤個案管理　個管師 林佩諭 0975-361-081<br>
+  版本 1.0　更新日期 2026/09/10
+</div>
+
+</div>
+
+<div class="bar">
+  <div class="bar-in">
+    <span class="count" id="count">還沒開始</span>
+    <button class="ghost reprint" id="backBtn" type="button" style="display:none">回去修改</button>
+    <button id="startBtn" type="button" disabled>看我的結果</button>
+  </div>
+</div>
+
+<script>
+const GROUPS = [
+  {
+    id:"bone", title:"骨骼與走路",
+    why:"荷爾蒙治療期間骨頭密度可能下降，研究顯示開始治療的第一年變化較明顯。骨頭變脆加上肌肉變沒力，跌倒的風險會上升。",
+    qs:[
+      { id:"fall", prompt:"最近三個月，您有跌倒過嗎？",
+        opts:[{t:"沒有",s:0},{t:"差點跌倒",s:1},{t:"跌倒1次",s:2},{t:"2次以上",s:3}] },
+      { id:"leg", prompt:"從椅子站起來、或上樓梯的時候，覺得腿沒力嗎？",
+        opts:[{t:"和以前一樣",s:0},{t:"偶爾",s:1},{t:"常常",s:2},{t:"需要扶東西",s:3}] },
+      { id:"bonepain", prompt:"有骨頭痛或腰背痛嗎？",
+        opts:[{t:"沒有",s:0},{t:"偶爾痠",s:1},{t:"常常痛",s:2},{t:"痛到影響生活",s:3}] },
+      { id:"dexa", prompt:"以前有沒有醫師說過您骨質疏鬆，或曾經骨折過？",
+        opts:[{t:"都沒有",s:0},{t:"有骨質疏鬆",s:2},{t:"骨折過",s:2},{t:"不清楚",s:1}] }
+    ]
+  },
+  {
+    id:"cardio", title:"心臟與代謝",
+    why:"荷爾蒙治療會影響血糖、血脂和體重。本來就有高血壓、糖尿病或高血脂的人，控制會變得比以前吃力，原本的藥可能需要調整。",
+    qs:[
+      { id:"chest", prompt:"有胸悶、胸痛，或走路比以前容易喘嗎？",
+        opts:[{t:"沒有",s:0},{t:"偶爾",s:2},{t:"常常",s:3}] },
+      { id:"weight", prompt:"體重和開始治療前比起來？",
+        opts:[{t:"差不多",s:0},{t:"胖了一些",s:1},{t:"胖很多",s:2},{t:"瘦了不少",s:2}] },
+      { id:"sugar", prompt:"如果您有糖尿病：血糖比以前難控制嗎？",
+        opts:[{t:"沒有糖尿病",s:0},{t:"和以前差不多",s:0},{t:"比以前高",s:2},{t:"沒在量",s:2}] },
+      { id:"bp", prompt:"家裡有量血壓的習慣嗎？",
+        opts:[{t:"每週都量",s:0},{t:"偶爾量",s:1},{t:"沒有量",s:2}] }
+    ]
+  },
+  {
+    id:"hotflash", title:"熱潮紅與夜間流汗",
+    why:"突然發熱、冒汗、臉紅是治療期間常見的反應。但夜裡流汗不一定都是熱潮紅，也可能是血糖太低或其他原因，所以下面幾題要一起回答。",
+    qs:[
+      { id:"flush", prompt:"一天當中會突然發熱、冒汗幾次？",
+        opts:[{t:"幾乎沒有",s:0},{t:"1到3次",s:1},{t:"4到8次",s:2},{t:"更多",s:3}] },
+      { id:"warn", prompt:"流汗之前，會先覺得一陣熱從胸口往臉上衝嗎？",
+        opts:[{t:"會",s:0},{t:"不確定",s:1},{t:"不會，醒來就濕了",s:2}] },
+      { id:"palp", prompt:"半夜醒來會心跳很快、發抖、或覺得很餓嗎？",
+        opts:[{t:"不會",s:0},{t:"偶爾",s:2},{t:"常常",s:3}] },
+      { id:"fever", prompt:"最近有發燒，或體重明顯變輕嗎？",
+        opts:[{t:"都沒有",s:0},{t:"有其中一項",s:3}] },
+      { id:"sleep", prompt:"最近睡得好嗎？",
+        opts:[{t:"睡得好",s:0},{t:"偶爾睡不好",s:1},{t:"常常睡不好",s:2},{t:"幾乎每晚都睡不好",s:3}] }
+    ]
+  },
+  {
+    id:"mood", title:"精神與心情",
+    why:"疲倦、心情低落、記性變差，在荷爾蒙治療期間並不少見。這不是意志力的問題。說出來，團隊才幫得上忙。",
+    qs:[
+      { id:"fatigue", prompt:"最近的體力和精神？",
+        opts:[{t:"還不錯",s:0},{t:"容易累",s:1},{t:"整天都累",s:2},{t:"累到做不了事",s:3}] },
+      { id:"low", prompt:"最近兩星期，心情低落、或對本來喜歡的事提不起勁？",
+        opts:[{t:"沒有",s:0},{t:"偶爾",s:1},{t:"超過一半的日子",s:2},{t:"幾乎每天",s:3}] },
+      { id:"cog", prompt:"記性或專注力和以前比？",
+        opts:[{t:"差不多",s:0},{t:"稍微差一點",s:1},{t:"明顯變差",s:2}] }
+    ]
+  },
+  {
+    id:"body", title:"身體與性功能",
+    why:"這些變化在治療期間並不少見，但很多人不好意思講。醫療團隊經常處理這類問題，講出來醫師才有機會評估。",
+    qs:[
+      { id:"breast", prompt:"胸部有脹痛、或摸起來變大嗎？",
+        opts:[{t:"沒有",s:0},{t:"有一點",s:1},{t:"明顯脹痛",s:2}] },
+      { id:"sex", prompt:"性慾或性功能的改變，對您造成困擾嗎？",
+        opts:[{t:"沒有困擾",s:0},{t:"有一點",s:1},{t:"困擾不小",s:2},{t:"不想回答",s:0}] }
+    ]
+  },
+  {
+    id:"life", title:"生活習慣",
+    why:"這幾項是您自己就能著手調整的部分。",
+    qs:[
+      { id:"smoke", prompt:"目前有抽菸嗎？",
+        opts:[{t:"沒有抽",s:0},{t:"已戒菸",s:0},{t:"還在抽",s:2}] },
+      { id:"exercise", prompt:"一週會活動身體幾次（走路、體操、重訓都算）？",
+        opts:[{t:"幾乎每天",s:0},{t:"每週3到4次",s:0},{t:"每週1到2次",s:1},{t:"幾乎沒有",s:2}] },
+      { id:"calcium", prompt:"平常會喝牛奶、吃豆製品、小魚乾或深綠色蔬菜嗎？",
+        opts:[{t:"每天都有",s:0},{t:"偶爾",s:1},{t:"很少",s:2}] }
+    ]
+  }
+];
+
+// 依作答分數對應的衛教內容
+const ADVICE = {
+  fall:[
+    null,
+    {lv:"watch",h:"差點跌倒也要記下來",b:["把差點跌倒的地點記起來，通常是同一個地方反覆發生。","浴室加防滑墊和扶手，床邊留一盞小夜燈。","夜裡起來上廁所先坐三十秒再站起來。"]},
+    {lv:"urgent",h:"跌倒過，這次回診一定要說",b:["請主動告訴醫師跌倒的次數、地點和當時在做什麼。","如果跌倒後某個部位還在痛，不要等，先聯絡醫療團隊。","請家人一起檢查家裡的地板、電線、門檻和照明。"]},
+    {lv:"urgent",h:"跌倒兩次以上，需要盡快處理",b:["這次回診請務必提出，讓醫師評估跌倒的原因。","可詢問醫師是否需要安排相關檢查，或轉介相關科別評估。","家中動線和浴室的改善不要再延後。"]}
+  ],
+  leg:[null,
+    {lv:"watch",h:"腿力正在變化",b:["起身前先在床邊或椅子上坐一下，讓身體適應。","上下樓梯扶好扶手，不要提重物。"]},
+    {lv:"watch",h:"肌肉無力要跟醫師講",b:["肌肉量減少是治療期間可能出現的變化，請讓醫師知道。","可詢問醫師能否安排復健科或運動指導。"]},
+    {lv:"urgent",h:"需要扶東西才站得起來",b:["這個程度請這次回診一定要說。","在還沒評估之前，避免一個人爬高、提重物或單獨外出。"]}
+  ],
+  bonepain:[null,
+    {lv:"watch",h:"痠痛先觀察",b:["記錄痛的位置、什麼時候痛、痛多久。","按時吃醫師開的止痛藥，不要忍到很痛才吃。"]},
+    {lv:"watch",h:"常常痛，請記錄下來",b:["把疼痛的位置和發生時間寫下來，回診時給醫師看。","詢問醫師是否需要進一步檢查。"]},
+    {lv:"urgent",h:"痛到影響生活，不要忍",b:["請這次回診就提出，或先打電話給個管師。","如果是突然變得很痛、或伴隨腿麻無力，請立刻就醫。"]}
+  ],
+  dexa:[null,
+    {lv:"ok",h:"不確定的話，回診順便問",b:["治療期間骨頭的變化，可以在回診時請醫師說明。","是否需要額外檢查，由醫師依您的療程長短與整體狀況判斷。"]},
+    {lv:"watch",h:"本來就有骨頭問題，要讓醫師知道",b:["有骨質疏鬆病史或骨折過的人，骨頭的保養要更留意。","回診時請主動告訴醫師這段病史，讓醫師一併評估。","居家防跌可以先做的：浴室加防滑墊和扶手、夜間留一盞小夜燈、起身前先坐一下再站起來。"]}
+  ],
+  chest:[null,null,
+    {lv:"urgent",h:"胸悶或變喘，要讓醫師知道",b:["這次回診請主動提出，並說明什麼情況下會發生。","如果是休息時也會胸痛、冒冷汗，請立即就醫，不要等回診。","本來有心臟病史的人更要提早說。"]},
+    {lv:"urgent",h:"經常胸悶或喘，請盡快聯絡",b:["建議不要等到下次回診，先打電話給醫療團隊。","突然發作且合併冒冷汗、手臂或下巴痛，直接叫救護車。"]}
+  ],
+  weight:[null,
+    {lv:"watch",h:"體重在往上走",b:["每週固定一天、同一個時間量體重，記在同一本本子上。","減少含糖飲料和油炸，這兩項效果最快。"]},
+    {lv:"watch",h:"體重變化明顯",b:["把體重變化告訴醫師，這會影響血糖和血脂的控制。","若是變瘦，也要說，不要以為變瘦一定是好事。"]}
+  ],
+  sugar:[null,null,
+    {lv:"watch",h:"血糖需要多留意",b:["治療期間血糖可能比以前難控制，用藥是否調整由醫師決定。","回診時把血糖記錄帶著，讓醫師看得到趨勢。","如果沒在量，可以請醫師建議多久量一次。"]}
+  ],
+  bp:[null,
+    {lv:"watch",h:"血壓可以量得更規律",b:["固定早上起床後、上廁所前量，數字比較準。","記在小本子上，回診帶去。"]},
+    {lv:"watch",h:"建議開始量血壓",b:["治療期間心血管風險可能上升，在家量血壓是常見的自我監測方式。","固定每天同一時段量，例如早上起床上完廁所、吃藥前。","坐著休息五分鐘再量，背靠椅背、雙腳平放，手臂與心臟同高。","連續量兩次、中間隔一分鐘，兩次的數字都記下來。","記在同一本本子或手機裡，回診帶去給醫師看。"]}
+  ],
+  flush:[null,
+    {lv:"ok",h:"熱潮紅在可以應付的範圍",b:["衣服穿薄一點、多層次，熱起來就脫一件。","避免太燙的湯、辛辣食物和酒。"]},
+    {lv:"watch",h:"熱潮紅次數不少",b:["房間保持通風，睡衣選吸汗透氣的材質。","隨身帶小毛巾和溫開水。","如果已經影響到睡眠或出門，回診時請告訴醫師，由醫師評估處理方式。"]},
+    {lv:"watch",h:"熱潮紅很頻繁，可以處理",b:["這個頻率確實辛苦，不用忍耐。","回診前幾天記一下一天大概幾次，有數字醫師比較好判斷。","一週超過十幾次，通常就值得討論要不要用藥。","是否需要用藥，請由醫師評估。"]}
+  ],
+  warn:[
+    {lv:"ok",h:"符合熱潮紅常見的樣子",b:["先覺得一陣熱往上衝、接著冒汗，這樣的感覺符合荷爾蒙治療期間常見的熱潮紅。","若次數或困擾程度增加，回診時告訴醫師。"]},
+    {lv:"watch",h:"不太確定的話，記錄幾天",b:["接下來幾天留意一下：流汗前有沒有先覺得熱。","把觀察到的情況回診時告訴醫師。"]},
+    {lv:"watch",h:"沒有發熱前兆，值得問一下",b:["典型熱潮紅會先有一陣熱往上衝。若只是醒來衣服濕了，原因可能不只一個。","回診時把這個情況告訴醫師。"]}
+  ],
+  palp:[null,null,
+    {lv:"urgent",h:"先確認不是血糖太低",b:["半夜流汗合併心跳快、發抖、飢餓感，有可能是血糖太低，特別是有糖尿病、正在吃降血糖藥的人。","近幾天量一次睡前血糖；醒來有這種情況時，當下也量一次。","把數字記下來回報開降血糖藥的醫師，不要自己調整藥量。","床頭放一小包糖果或方糖備用。"]},
+    {lv:"urgent",h:"經常這樣，請盡快聯絡",b:["這個情況不要等下次回診，先打電話給個管師。","量血糖的方式同上，並把記錄帶著。","不要自行調整任何藥物。"]}
+  ],
+  fever:[null,null,null,
+    {lv:"urgent",h:"發燒或變瘦要先讓醫師看",b:["夜間流汗合併發燒或體重下降，需要先排除感染等其他原因，不能當成熱潮紅處理。","請聯絡醫療團隊，不要等到下次回診。","若合併發冷發抖，請直接就醫。"]}
+  ],
+  sleep:[null,
+    {lv:"ok",h:"偶爾睡不好",b:["睡前減少大量喝水，可能有助於減少夜裡起來的次數。","白天維持一些光照與活動，回診時也可以跟醫師討論睡眠。"]},
+    {lv:"watch",h:"常常睡不好",b:["先找出原因：是熱潮紅、夜尿，還是心裡有事睡不著？","把原因告訴醫師，處理方式不一樣。"]},
+    {lv:"watch",h:"幾乎每晚睡不好",b:["長期睡不好值得提出來討論。","回診請提出來，並說明是哪一種睡不著。"]}
+  ],
+  fatigue:[null,
+    {lv:"ok",h:"容易累是常見的",b:["把重要的事安排在一天中精神最好的時段。","累了就休息，但白天不要躺太久，會影響晚上睡眠。"]},
+    {lv:"watch",h:"整天都覺得累",b:["疲倦有時和貧血有關，回診可以問醫師要不要抽血看看。","活動量的調整可能有幫助，但適合的強度請先問過醫師。"]},
+    {lv:"urgent",h:"累到做不了事，請告訴團隊",b:["這個程度已經影響生活，回診請務必提出。","也請家人幫忙留意您的活動量變化。"]}
+  ],
+  low:[null,
+    {lv:"ok",h:"偶爾心情低落",b:["找一件做得到的小事去做，散步、澆花都算。","跟家人或朋友講講話，不要一個人悶著。"]},
+    {lv:"watch",h:"心情低落的日子不少",b:["心情的變化在治療期間並不少見，不是您想太多。","回診時請告訴醫師或個管師，團隊有資源可以幫忙。","如果需要有人談談，衛福部安心專線 1925，24小時免費。"]},
+    {lv:"urgent",h:"幾乎每天都這樣，請讓人知道",b:["請這次就告訴醫師或個管師，不要等下次回診。","也讓家人知道您的狀況，不需要一個人撐著。","衛福部安心專線 1925，24小時免費，隨時可以打。"]}
+  ],
+  cog:[null,
+    {lv:"ok",h:"記性有一點變化",b:["重要的事寫下來，用小本子或手機提醒。","藥物用藥盒分裝，減少記錯的機會。"]},
+    {lv:"watch",h:"記性明顯變差",b:["回診時告訴醫師，這也是治療期間可能出現的變化。","請家人協助提醒回診日期和用藥時間。"]}
+  ],
+  breast:[null,
+    {lv:"ok",h:"胸部有點脹",b:["胸部脹痛在治療期間並不少見，回診時可以順便提。","衣服選寬鬆一點，減少摩擦。"]},
+    {lv:"watch",h:"胸部明顯脹痛",b:["回診時提出來，由醫師評估是否需要處理。","不要自己揉或熱敷，先讓醫師看過。"]}
+  ],
+  sex:[null,
+    {lv:"ok",h:"性功能的改變",b:["性慾與性功能的變化，是治療期間常被提到的情況。","如果對您或伴侶造成困擾，可以跟醫師談，不必難以啟齒。"]},
+    {lv:"watch",h:"這件事造成困擾",b:["請放心跟醫師或個管師談，這是很常見的諮詢內容。","恢復的情況因人而異，也和療程長短有關，可以請醫師說明您的狀況。"]}
+  ],
+  smoke:[null,null,
+    {lv:"watch",h:"戒菸對您的幫助比想像中大",b:["抽菸會加速骨質流失，也增加治療期間的心血管風險。","國民健康署免費戒菸專線 0800-63-63-63。","可自行掛號戒菸門診，由醫師評估是否適合使用戒菸輔助藥物。先按上面的「存成圖片」再點，比較保險。線上掛號：<a href=\"https://register.cgmh.org.tw/Department_WEEK/2/23H00E21700D21300E\" target=\"_blank\" rel=\"noopener\">基隆長庚戒菸門診掛號</a>"]}
+  ],
+  exercise:[null,
+    {lv:"watch",h:"活動量可以再多一點",b:["國際指引建議阻力訓練搭配有氧運動，並以有人指導的方式進行。","阻力訓練不用上健身房：坐在椅子上抬腿、扶著椅背做半蹲、手握裝水的寶特瓶做上舉，都算。","有氧可以從平地散步、社區太極或元極舞開始。"]},
+    {lv:"watch",h:"目前幾乎沒有活動",b:["多份國際指引都把規律活動列為治療期間的建議事項。","從走路開始就好，不用一次到位。","若有其他慢性病，請先問過醫師再增加強度。"]}
+  ],
+  calcium:[null,
+    {lv:"watch",h:"鈣質可以再補一些",b:["牛奶、優格、板豆腐、小魚乾、深綠色蔬菜都是來源，一杯牛奶約含 250 毫克鈣。","接受荷爾蒙治療的男性，建議每天鈣質約 1200 至 1500 毫克、維生素D 約 800 至 2000 IU，這是飲食加補充品的總量，再多並沒有額外好處。","要買補充品，可以到住家附近藥局請藥師推薦，並告訴藥師您目前正在進行的療程。"]},
+    {lv:"watch",h:"鈣質攝取偏少",b:["接受荷爾蒙治療的男性，建議每天鈣質約 1200 至 1500 毫克、維生素D 約 800 至 2000 IU，這是飲食加補充品的總量，再多並沒有額外好處。","國內骨質疏鬆症治療指引也提到，50 歲以上成人每天鈣質至少 1200 毫克（含鈣片）、維生素D 800 至 1000 IU。","一杯牛奶約 250 毫克鈣，一塊板豆腐、一把小魚乾也是好來源。","鈣片一次吃太多吸收不好，分次服用、每次不超過 500 毫克，利用率較好。","有腎結石、腎臟病，或已經在吃其他鈣片的人，請先問過醫師再補充。","要買補充品，可以到住家附近藥局請藥師推薦，並告訴藥師您目前正在進行的療程。"]}
+  ]
+};
+
+const ALWAYS = [
+  { h:"打針之後", b:["注射部位可能有點痠、發紅，或摸到硬塊。研究顯示約一成左右的人會出現皮膚反應，硬塊有時會持續數週到數月。","不要用力搓揉、抓癢或按摩打針的位置，穿寬鬆一點的衣服。","覺得痛或發紅，可以冰敷：清醒時每小時敷 20 分鐘，打針後最多做一天。","不建議熱敷。熱會讓局部血流增加，可能影響長效針劑的藥物釋放。","打針當天淋浴、盆浴、把該處弄濕都沒問題。","紅、痛、不適若超過三天沒有消退，或出現化膿、破皮潰瘍、發燒，請聯絡醫療團隊。","日常照顧方式請依打針時護理人員的說明。"] },
+  { h:"骨頭的保養：居家防跌", b:["研究顯示骨質流失在開始治療的第一年較為明顯，防跌是您現在做得到的部分。","地板保持淨空，收好電線、雜物與翹起的地毯邊角。","浴室鋪防滑墊、裝扶手，馬桶旁最好也有。","夜間走道和廁所留一盞小夜燈。","穿合腳、鞋底止滑的鞋子，室內不要只穿襪子走動。","有在吃安眠藥或鎮靜劑的人，夜裡起身特別小心，並讓醫師知道。"] },
+  { h:"飲食：沒有特別的禁忌", b:["食物本身不會影響治療效果，目前沒有研究支持治療期間需要忌口。","豆腐、豆漿常被誤會不能吃，其實可以正常吃，也是不錯的蛋白質與鈣質來源。","方向和一般心血管保健一樣：多蔬菜水果，少紅肉與加工肉品，少精緻澱粉和含糖飲料。","油的部分，肥肉、五花肉、豬皮這類要少吃，吃多了血脂容易變高。","想吃保健食品或中藥之前，請先把產品拿給醫師或藥師看過。","原本醫師已經交代過飲食限制的人，還是照醫師說的做。"] },
+  { h:"骨頭的保養：飲食", b:["每天鈣質約 1200 至 1500 毫克、維生素D 約 800 至 2000 IU，這是飲食加補充品的總量。是否需要吃補充品，由醫師或藥師評估。","蛋白質也要吃夠，豆製品、魚、蛋、肉都算。","想知道哪些食物含鈣、一天怎麼吃才夠，國民健康署有一份圖解懶人包（點開會另開分頁）：<a href=\"https://health99.hpa.gov.tw/health99/ShortHE/12/6388\" target=\"_blank\" rel=\"noopener\">鈣質營養懶人包</a>","戒菸、少喝酒，兩者都與骨質流失有關。","飲食是基礎，但不能取代醫師的評估。"] }
+];
+
+const answers = {};
+let total = 0;
+GROUPS.forEach(g => total += g.qs.length);
+
+function build(){
+  const root = document.getElementById("quiz");
+  GROUPS.forEach(g => {
+    const sec = document.createElement("section");
+    sec.className = "q-group";
+    const h = document.createElement("h2"); h.textContent = g.title; sec.appendChild(h);
+    const why = document.createElement("p"); why.className="why"; why.textContent = g.why; sec.appendChild(why);
+    g.qs.forEach(q => {
+      const box = document.createElement("div"); box.className = "q";
+      const p = document.createElement("p"); p.className="prompt"; p.textContent = q.prompt; box.appendChild(p);
+      const opts = document.createElement("div");
+      opts.className="opts"; opts.setAttribute("role","group");
+      opts.setAttribute("aria-label", q.prompt);
+      opts.dataset.qid = q.id;
+      q.opts.forEach((o,i) => {
+        const b = document.createElement("button");
+        b.type="button"; b.textContent=o.t;
+        b.dataset.idx = i;
+        b.setAttribute("aria-pressed","false");
+        b.addEventListener("click", () => {
+          [...opts.children].forEach(c => c.setAttribute("aria-pressed","false"));
+          b.setAttribute("aria-pressed","true");
+          answers[q.id] = {score:o.s, label:o.t, prompt:q.prompt, idx:i};
+          persist();
+          updateCount();
+        });
+        opts.appendChild(b);
+      });
+      box.appendChild(opts);
+      sec.appendChild(box);
+    });
+    root.appendChild(sec);
+  });
+}
+
+const KEY="adt_state_v1";
+function persist(shown){
+  try{
+    sessionStorage.setItem(KEY, JSON.stringify({
+      a:answers, shown: shown!==undefined ? shown : (state.shown||false),
+      n:(document.getElementById("pName")||{}).value||"",
+      c:(document.getElementById("pNo")||{}).value||""
+    }));
+  }catch(e){}
+}
+const state={shown:false};
+function restore(){
+  let s=null;
+  try{ s=JSON.parse(sessionStorage.getItem(KEY)||"null"); }catch(e){}
+  if(!s || !s.a) return false;
+  Object.keys(s.a).forEach(id=>{
+    const g=document.querySelector('.opts[data-qid="'+id+'"]');
+    if(!g) return;
+    const b=g.querySelector('button[data-idx="'+s.a[id].idx+'"]');
+    if(!b) return;
+    [...g.children].forEach(c=>c.setAttribute("aria-pressed","false"));
+    b.setAttribute("aria-pressed","true");
+    answers[id]=s.a[id];
+  });
+  if(s.n && document.getElementById("pName")) document.getElementById("pName").value=s.n;
+  if(s.c && document.getElementById("pNo")) document.getElementById("pNo").value=s.c;
+  state.shown = !!s.shown;
+  return Object.keys(answers).length>0;
+}
+
+function updateCount(){
+  const done = Object.keys(answers).length;
+  const c = document.getElementById("count");
+  const btn = document.getElementById("startBtn");
+  c.textContent = "已回答 " + done + " / " + total + " 題";
+  btn.disabled = done === 0;
+}
+
+function render(){
+  const wrapEl = document.getElementById("result");
+  const quiz = document.getElementById("quiz");
+  const cards = {urgent:[], watch:[], ok:[]};
+
+  Object.keys(answers).forEach(id => {
+    const a = answers[id];
+    const table = ADVICE[id];
+    if(!table) return;
+    const item = table[a.score];
+    if(item) cards[item.lv].push({...item, ans:a});
+  });
+
+  let html = '<div class="res-head"><h2>您的檢視結果</h2>';
+  if(cards.urgent.length){
+    html += '<p>有 ' + cards.urgent.length + ' 項建議<strong>盡快讓醫療團隊知道</strong>，請按最下面的「存成圖片」，回診拿給醫師看。</p>';
+  } else if(cards.watch.length){
+    html += '<p>有 ' + cards.watch.length + ' 項值得在下次回診時提出來。請按最下面的「存成圖片」，回診拿給醫師看。</p>';
+  } else {
+    html += '<p>目前沒有特別需要提出的項目。請繼續維持，並在下次回診前再做一次。</p>';
+  }
+  html += '</div>';
+
+  const section = (arr, lv, title) => {
+    if(!arr.length) return "";
+    let s = '<h2 style="color:var(--teal-deep);border-bottom:3px solid var(--teal);padding-bottom:10px;margin:32px 0 20px;">'+title+'</h2>';
+    arr.forEach(c => {
+      s += '<div class="card lv-'+lv+'">';
+      s += '<span class="tag">'+(lv==="urgent"?"請盡快提出":lv==="watch"?"回診時提出":"繼續保持")+'</span>';
+      s += '<h3>'+c.h+'</h3>';
+      s += '<p style="font-size:16px;color:var(--ink-soft);margin-top:0;">您的回答：'+c.ans.prompt+' → '+c.ans.label+'</p>';
+      s += '<ul>'+c.b.map(x=>'<li>'+x+'</li>').join("")+'</ul></div>';
+    });
+    return s;
+  };
+
+  html += section(cards.urgent,"urgent","請盡快讓醫療團隊知道");
+  html += section(cards.watch,"watch","下次回診時提出來");
+  html += section(cards.ok,"ok","目前狀況還好，這樣繼續");
+
+  html += '<div class="always"><h2>不管結果如何，這幾件事都適用</h2>';
+  ALWAYS.forEach(a => {
+    html += '<div class="card"><h3>'+a.h+'</h3><ul>'+a.b.map(x=>'<li>'+x+'</li>').join("")+'</ul></div>';
+  });
+  html += '</div>';
+
+  html += '<div class="note-doc"><h3>給醫療團隊</h3>'+
+    '<p>本表為病人自填之居家自我檢視，非臨床評估工具，不作為副作用分級依據。副作用之等級、頻率與處置，仍由醫師依實際評估記載於病歷。</p></div>';
+
+  state.shown = true; persist(true);
+  wrapEl.innerHTML = html;
+  quiz.classList.add("hidden");
+  wrapEl.classList.remove("hidden");
+  window.scrollTo({top:0, behavior:"instant"});
+
+  const btn = document.getElementById("startBtn");
+  btn.textContent = "存成圖片";
+  btn.onclick = shotCheck;
+  document.getElementById("backBtn").style.display = "inline-block";
+  document.getElementById("count").textContent = "檢視完成";
+}
+
+build();
+
+/* ===== 產生圖片 ===== */
+const CV = {
+  ink:"#1C2B2E", soft:"#4A5D60", teal:"#14625A", tealDeep:"#0D3F3A",
+  amber:"#9C5F14", alert:"#8E3325", rule:"#D3D8D1", paper:"#FFFFFF",
+  serif:'"Noto Serif TC","Songti TC","PingFang TC",serif',
+  sans:'"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif'
+};
+function cvFont(b){
+  const S = {
+    h1:["700 34px "+CV.serif, 50, CV.ink],
+    h2:["700 26px "+CV.serif, 42, CV.tealDeep],
+    h3:["700 23px "+CV.sans, 37, CV.ink],
+    tag:["700 18px "+CV.sans, 31, CV.alert],
+    p :["400 21px "+CV.sans, 35, CV.ink],
+    li:["400 21px "+CV.sans, 33, CV.ink],
+    meta:["400 17px "+CV.sans, 29, CV.soft]
+  };
+  return S[b.type] || S.p;
+}
+function cvWrap(ctx, text, maxW){
+  const out=[]; let line="";
+  for(const ch of text){
+    if(ch==="\n"){ out.push(line); line=""; continue; }
+    if(ctx.measureText(line+ch).width > maxW && line){ out.push(line); line=ch; }
+    else line += ch;
+  }
+  out.push(line);
+  return out;
+}
+function makeImage(blocks, filename, host){
+  const W=800, PAD=40;
+  const cv=document.createElement("canvas");
+  const ctx=cv.getContext("2d");
+
+  const run = (dry) => {
+    let y = PAD;
+    blocks.forEach(b => {
+      if(b.type==="space"){ y += (b.h||18); return; }
+      if(b.type==="rule"){
+        if(!dry){ ctx.strokeStyle=CV.rule; ctx.lineWidth=2;
+          ctx.beginPath(); ctx.moveTo(PAD,y); ctx.lineTo(W-PAD,y); ctx.stroke(); }
+        y += 20; return;
+      }
+      const [font, lh, defColor] = cvFont(b);
+      ctx.font = font;
+      const indent = b.type==="li" ? 30 : 0;
+      const lines = cvWrap(ctx, b.text, W - PAD*2 - indent);
+      lines.forEach((ln,i) => {
+        if(!dry){
+          ctx.fillStyle = b.color || defColor;
+          if(b.type==="li" && i===0){ ctx.fillText("・", PAD, y+lh*0.72); }
+          ctx.fillText(ln, PAD+indent, y+lh*0.72);
+        }
+        y += lh;
+      });
+      if(b.type==="h2"){
+        if(!dry){ ctx.strokeStyle=CV.teal; ctx.lineWidth=4;
+          ctx.beginPath(); ctx.moveTo(PAD,y+6); ctx.lineTo(W-PAD,y+6); ctx.stroke(); }
+        y += 20;
+      }
+      y += (b.gap!==undefined ? b.gap : 5);
+    });
+    return y + PAD;
+  };
+
+  const H = run(true);
+  const dpr = 1.5;
+  cv.width = W*dpr; cv.height = H*dpr;
+  ctx.scale(dpr,dpr);
+  ctx.fillStyle = CV.paper; ctx.fillRect(0,0,W,H);
+  ctx.textBaseline = "alphabetic";
+  run(false);
+
+  host.innerHTML = '<p>圖片已產生。手機請長按圖片存到相簿，電腦已自動下載。回診時拿給醫師看。</p>';
+  const img = document.createElement("img");
+  img.alt = "檢視結果圖片";
+  img.src = cv.toDataURL("image/png");
+  host.appendChild(img);
+  cv.toBlob(bl => {
+    if(!bl) return;
+    const a=document.createElement("a");
+    a.href=URL.createObjectURL(bl); a.download=filename;
+    document.body.appendChild(a); a.click();
+    setTimeout(()=>{URL.revokeObjectURL(a.href); a.remove();}, 4000);
+  }, "image/png");
+  host.scrollIntoView({behavior:"smooth", block:"start"});
+}
+function who(){
+  const n=(document.getElementById("pName").value||"").trim();
+  const c=(document.getElementById("pNo").value||"").trim();
+  return "姓名 "+(n||"＿＿＿＿＿＿")+"　病歷號 "+(c||"＿＿＿＿＿＿");
+}
+function stamp(){
+  const d=new Date();
+  return d.getFullYear()+"/"+String(d.getMonth()+1).padStart(2,"0")+"/"+String(d.getDate()).padStart(2,"0");
+}
+function fileStamp(){ return stamp().replace(/\//g,""); }
+
+function shotCheck(){
+  const B=[];
+  B.push({type:"h1", text:"荷爾蒙治療 居家自我檢視結果"});
+  B.push({type:"meta", text:"基隆長庚醫院　腫瘤個案管理　個管師 林佩諭 0975-361-081"});
+  B.push({type:"meta", text:"填寫日期 "+stamp()+"　"+who()});
+  B.push({type:"rule"});
+  const cards={urgent:[],watch:[],ok:[]};
+  Object.keys(answers).forEach(id=>{
+    const a=answers[id], t=ADVICE[id]; if(!t) return;
+    const it=t[a.score]; if(it) cards[it.lv].push({...it, ans:a});
+  });
+  const sect=(arr,title,color,tagText)=>{
+    if(!arr.length) return;
+    B.push({type:"space",h:14});
+    B.push({type:"h2", text:title, color:color});
+    arr.forEach(c=>{
+      B.push({type:"tag", text:"【"+tagText+"】", color:color});
+      B.push({type:"h3", text:c.h});
+      B.push({type:"meta", text:"回答："+c.ans.prompt+" → "+c.ans.label});
+      c.b.forEach(x=>B.push({type:"li", text:x}));
+      B.push({type:"space",h:10});
+    });
+  };
+  sect(cards.urgent,"請盡快讓醫療團隊知道",CV.alert,"盡快提出");
+  sect(cards.watch,"下次回診時提出來",CV.amber,"回診提出");
+  sect(cards.ok,"目前狀況還好，這樣繼續",CV.teal,"繼續保持");
+  if(!cards.urgent.length && !cards.watch.length && !cards.ok.length){
+    B.push({type:"p", text:"本次未選答任何項目。"});
+  }
+  B.push({type:"space",h:10});
+  B.push({type:"rule"});
+  B.push({type:"meta", text:"本表為病人自填之居家自我檢視，非臨床評估工具，不作為副作用分級依據。"});
+  B.push({type:"meta", text:"副作用之等級、頻率與處置，仍由醫師依實際評估記載於病歷。"});
+  B.push({type:"space",h:10});
+  B.push({type:"meta", text:"醫師／個管師確認 ________________"});
+  makeImage(B, "居家自我檢視_"+fileStamp()+".png", document.getElementById("shotCheck"));
+}
+
+document.getElementById("startBtn").onclick = render;
+document.getElementById("backBtn").onclick = () => {
+  document.getElementById("result").classList.add("hidden");
+  document.getElementById("quiz").classList.remove("hidden");
+  document.getElementById("backBtn").style.display = "none";
+  state.shown = false; persist(false);
+  const btn = document.getElementById("startBtn");
+  btn.textContent = "看我的結果";
+  btn.onclick = render;
+  updateCount();
+  window.scrollTo({top:0, behavior:"instant"});
+};
+["pName","pNo"].forEach(id=>{
+  const el=document.getElementById(id);
+  if(el) el.addEventListener("input", ()=>persist());
+});
+
+if(restore()){
+  updateCount();
+  if(state.shown) render();
+} else {
+  updateCount();
+}
+</script>
+
+<!-- ===================================================================
+     Cloudflare Web Analytics
+     申請完成後，把 Cloudflare 給你的那一行 <script> 貼在下面這行的下方，
+     取代這段註解即可。格式長得像：
+     <script defer src="https://static.cloudflareinsights.com/beacon.min.js"
+             data-cf-beacon='{"token": "你的權杖"}'></script>
+     注意：只記錄「有人開啟這一頁」，不會送出任何作答內容或姓名病歷號。
+     ==================================================================== -->
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "1fe6ce106a09484fb4852fc6656d1134"}'></script><!-- End Cloudflare Web Analytics -->
+
+</body>
+</html>
